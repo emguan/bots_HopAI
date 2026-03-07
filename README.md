@@ -318,3 +318,13 @@ What it does:
 - Uses `GEMINI_API_KEY` if set, otherwise prompts for key.
 - Runs an interactive loop preserving conversation history.
 - Type `/exit` to quit.
+
+### 3) Run both scripts from Jupyter
+
+Open and run:
+
+```
+notebooks/run_gemini_scripts.ipynb
+```
+
+The notebook contains cells that call both Python scripts using `subprocess.run(...)` so you can run bot creation and interactive chat from a notebook workflow.
