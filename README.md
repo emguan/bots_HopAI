@@ -288,3 +288,33 @@ This format teaches:
 ## Advanced Upgrade: Model Variants
 
 Some bots can secretly run with different behavior settings (for example high/low temperature, strict persona lock, or weak persona lock). Crackers then infer both prompt layers and model behavior settings, which better mirrors real evaluation workflows.
+
+---
+
+## Included Gemini Scripts
+
+This repository includes helper scripts to create and chat with a Gemini-powered bot profile.
+
+### 1) Create a bot profile
+
+```bash
+python scripts/create_gemini_bot.py
+```
+
+What it does:
+- Asks for your Gemini API key (hidden input).
+- Asks for bot name, model, and system prompt.
+- Sends a validation request to Gemini.
+- Saves the bot profile JSON to `bots/<name>.json`.
+
+### 2) Chat with a saved bot profile
+
+```bash
+python scripts/chat_with_gemini_bot.py
+```
+
+What it does:
+- Lists available profiles from `bots/*.json`.
+- Uses `GEMINI_API_KEY` if set, otherwise prompts for key.
+- Runs an interactive loop preserving conversation history.
+- Type `/exit` to quit.
