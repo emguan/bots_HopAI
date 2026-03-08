@@ -291,40 +291,21 @@ Some bots can secretly run with different behavior settings (for example high/lo
 
 ---
 
-## Included Gemini Scripts
+---
 
-This repository includes helper scripts to create and chat with a Gemini-powered bot profile.
+## Included Interactive Notebook
 
-### 1) Create a bot profile
+This repository provides a single notebook workflow for Gemini bot creation and interaction:
 
-```bash
-python scripts/create_gemini_bot.py
-```
+- `notebooks/run_gemini_scripts.ipynb`
 
-What it does:
-- Asks for your Gemini API key (hidden input).
-- Asks for bot name, model, and system prompt.
-- Sends a validation request to Gemini.
-- Saves the bot profile JSON to `bots/<name>.json`.
+What it includes:
 
-### 2) Chat with a saved bot profile
+- Interactive bot setup (`BOT_NAME`, `MODEL`, `SYSTEM_PROMPT`)
+- API key loading (`GEMINI_API_KEY` or hidden prompt)
+- Validation call to Gemini
+- Saving profiles to `bots/<name>.json`
+- Loading saved profiles
+- Interactive multi-turn chat loop (`/exit` to quit)
 
-```bash
-python scripts/chat_with_gemini_bot.py
-```
-
-What it does:
-- Lists available profiles from `bots/*.json`.
-- Uses `GEMINI_API_KEY` if set, otherwise prompts for key.
-- Runs an interactive loop preserving conversation history.
-- Type `/exit` to quit.
-
-### 3) Run both scripts from Jupyter
-
-Open and run:
-
-```
-notebooks/run_gemini_scripts.ipynb
-```
-
-The notebook contains cells that call both Python scripts using `subprocess.run(...)` so you can run bot creation and interactive chat from a notebook workflow.
+Open the notebook in Jupyter and run it top-to-bottom.

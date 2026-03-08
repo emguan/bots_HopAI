@@ -1,84 +1,54 @@
-# Running the Gemini Bot Tools
+# Running the Gemini Bot Workflow (Notebook)
 
-This project includes two Python scripts and one Jupyter notebook for creating and chatting with Gemini-powered bot profiles.
+This project now uses a single interactive notebook for creating and chatting with Gemini bot profiles.
+
+## Primary File
+
+- `notebooks/run_gemini_scripts.ipynb`
 
 ## Prerequisites
 
-- Python 3.10+ (or another modern Python 3 version)
+- Python 3 with Jupyter support
 - A valid Gemini API key
-- Internet access (scripts call Gemini REST APIs)
+- Internet access (Gemini REST API calls)
 
-## Project Files
+## How to Run
 
-- `scripts/create_gemini_bot.py` – create and validate a bot profile
-- `scripts/chat_with_gemini_bot.py` – interactive chat with a saved profile
-- `notebooks/run_gemini_scripts.ipynb` – notebook wrapper to run both scripts
+1. Open `notebooks/run_gemini_scripts.ipynb` in Jupyter.
+2. Run cells top-to-bottom.
+3. Provide your API key when prompted (or set `GEMINI_API_KEY` first).
+4. Configure bot fields (`BOT_NAME`, `MODEL`, `SYSTEM_PROMPT`).
+5. Run validation, save profile to `bots/*.json`, load a profile, and start chat.
 
-## 1) Create a Bot Profile
+## Notebook Sections
 
-Run:
+- Setup/imports and HTTP helper
+- Bot configuration
+- API key loading
+- Validation call
+- Save profile JSON
+- Load saved profile
+- Interactive multi-turn chat (`/exit` to quit)
+- Optional one-shot helper
 
-```bash
-python scripts/create_gemini_bot.py
-```
-
-You will be prompted for:
-
-1. Gemini API key (hidden input)
-2. Bot name (default: `parable_guide`)
-3. Model (default: `gemini-2.0-flash`)
-4. System prompt (multi-line; end with empty line)
-
-What happens next:
-
-- The script performs a quick validation request to Gemini.
-- If successful, it saves a profile JSON to `bots/<name>.json` (or your custom path).
-- The API key is **not** saved in the profile.
-
-## 2) Chat with a Saved Bot Profile
-
-Run:
-
-```bash
-python scripts/chat_with_gemini_bot.py
-```
-
-Behavior:
-
-- Lists profiles in `bots/*.json`
-- Lets you choose a profile by number
-- Uses `GEMINI_API_KEY` if present, otherwise asks for key interactively
-- Starts chat loop and preserves conversation history across turns
-- Use `/exit` (or `exit` / `quit`) to stop
-
-### Optional: set API key once per shell session
+## Optional: set API key in shell first
 
 ```bash
 export GEMINI_API_KEY="your_api_key_here"
-python scripts/chat_with_gemini_bot.py
 ```
 
-## 3) Run from Jupyter Notebook
+## File Output
 
-Open:
+The notebook writes profiles to:
 
-```text
-notebooks/run_gemini_scripts.ipynb
-```
+- `bots/<bot_name>.json`
 
-Notebook flow:
+API keys are not written to disk by default.
 
-- Verifies script paths
-- Runs `create_gemini_bot.py`
-- Runs `chat_with_gemini_bot.py`
+## Validation
 
-> Note: Both scripts are interactive, so they will still prompt for input when launched from notebook cells.
-
-## Quick Validation Commands
-
-You can validate local script syntax and notebook JSON format with:
+Check notebook JSON validity:
 
 ```bash
-python -m py_compile scripts/create_gemini_bot.py scripts/chat_with_gemini_bot.py
 python -m json.tool notebooks/run_gemini_scripts.ipynb > /dev/null
 ```
